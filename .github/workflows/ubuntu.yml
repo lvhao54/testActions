@@ -37,7 +37,13 @@ jobs:
       - name: Build c++ project
         uses: nicledomaS/cmake_build_action@v1.4
 
-      - uses: actions/upload-artifact@v2
+      - name: Upload To Github Release
+        uses: xresloader/upload-to-github-release@v1.3.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          path: lib/
-          name: artifact_${{ matrix.os }}_${{ matrix.configs }}
+          file: lib/
+          tags: true
+          draft: true
+          overwrite: true
+
