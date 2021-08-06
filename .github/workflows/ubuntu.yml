@@ -5,8 +5,6 @@ name: Ubuntu
 on:
   push:
     branches: [main]
-  # pull_request:
-  #   branches: [master]
 
 jobs:
   build-ubuntu:
@@ -28,32 +26,5 @@ jobs:
             }
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Install Dependencies
-        run: |
-          sudo apt-get -y -qq update
-          sudo apt-get -y -qq --no-install-recommends install \
-            cmake 
-      - name: Configure & Build
-        uses: lukka/run-cmake@v3
-        with:
-          buildDirectory: ${{ runner.workspace }}/build/
-          cmakeAppendedArgs: >-
-            -G Ninja
-            -D CMAKE_BUILD_TYPE=RelWithDebInfo
-          cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
-
-          # -DZEAL_PORTABLE_BUILD=${{ matrix.config.options.ZEAL_PORTABLE_BUILD }}
-          # \
-          #   extra-cmake-modules \
-          #   libarchive-dev \
-          #   libqt5x11extras5-dev \
-          #   libsqlite3-dev \
-          #   libxcb-keysyms1-dev \
-          #   ninja-build \
-          #   qt5-default \
-          #   qtwebengine5-dev
+      - name: Build c++ project
+        uses: nicledomaS/cmake_build_action@v1.4
