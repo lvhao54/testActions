@@ -15,16 +15,29 @@ jobs:
       matrix:
         config:
           - {
-              name: "Ubuntu 18.04",
-              os: ubuntu-18.04,
-              # options: { ZEAL_PORTABLE_BUILD: "OFF" },
+              name: "Windows 10",
+              os: windows-latest,
+              configs: Release,
             }
           - {
               name: "Ubuntu 20.04",
               os: ubuntu-latest,
-              # options: { ZEAL_PORTABLE_BUILD: "ON" },
+              configs: Release,
             }
-
+          - {
+              name: "MacOS",
+              os: macos-latest,
+              configs: Release,
+            }
+            
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2.0.0
+
       - name: Build c++ project
         uses: nicledomaS/cmake_build_action@v1.4
+        
+      - uses: actions/upload-artifact@v2
+        with:
+          path: lib/*.tar.gz
+          name: artifact_${{ matrix.os }}_${{ matrix.configs }}.tar.gz
