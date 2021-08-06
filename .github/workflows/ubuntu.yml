@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Ubuntu
+name: CI
 
 on:
   push:
@@ -36,8 +36,8 @@ jobs:
 
       - name: Build c++ project
         uses: nicledomaS/cmake_build_action@v1.4
-        
+
       - uses: actions/upload-artifact@v2
         with:
-          path: lib/*.tar.gz
-          name: artifact_${{ matrix.os }}_${{ matrix.configs }}.tar.gz
+          path: lib/
+          name: artifact_${{ matrix.os }}_${{ matrix.configs }}
