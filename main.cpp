@@ -23,7 +23,7 @@ private:
 };
 int main()
 {
-        asdfCopyTest cop;
+        CopyTest cop;
         std::cout<<"Hello World! "<<std::endl;
         auto obj1 = cop.copyExecute();
         
